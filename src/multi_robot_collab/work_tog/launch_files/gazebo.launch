@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+<arg name="world_file"     default="/home/naad/catkin_ws/src/multirobot/src/2wd/two_wd_worlds/worlds/world04.world"/>
+    <arg name="gui" default="true"/>
+    <arg name="initial_pose_x" default="0.0"/>
+    <arg name="initial_pose_y" default="0.0"/>
+    <arg name="initial_pose_z" default="0"/>
+    <arg name="robot_name" default="A_DEFAULT_ROBOT_NAME"/>
+    <param name="/use_sim_time" value="true"/>
+
+        <!--  ******************** Gazebo ********************  -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="use_sim_time" value="true"/>
+        <arg name="debug" value="false"/>
+        <arg name="world_name" value="$(arg world_file)"/>
+        <arg name="gui" value="$(arg gui)"/>
+    </include>
+
+
+<!-- Set different initial poses to avoid collision when spawning the model -->
+<group ns="diff">
+    <include file="$(find work_tog)/launch_files/spawn.launch">
+        <arg name="initial_pose_x" value="-9.0"/>
+        <arg name="initial_pose_y" default="1.0"/>
+        <arg name="robot_name" value="diff"/>
+
+    </include>  
+</group>
+
+<group ns="ss_test">
+    <include file="$(find work_tog)/launch_files/spawn.launch">
+        <arg name="initial_pose_x" value="-9.0"/>
+        <arg name="initial_pose_y" default="-1.0"/>
+        <arg name="robot_name" value="ss_test"/>
+    </include>
+</group>    
+
+  <!-- Show in Rviz   -->
+  <!--node name="rviz" pkg="rviz" type="rviz" args = "$(find work_tog)/models/$(arg robot_name).xacro"  /-->
+
+</launch>

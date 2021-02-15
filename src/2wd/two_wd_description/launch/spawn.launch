@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <!--remap from="/cmd_vel" to="/2wd/cmd_vel"/>
+  <remap from="/odom" to="/2wd/odom"/-->
+    <param name="robot_description" command="$(find xacro)/xacro.py '$(find two_wd_description)/urdf/2wd.xacro'"/>
+
+    <arg name="x" default="-9"/>
+    <arg name="y" default="-1"/>
+    <arg name="z" default="0"/>
+
+    <node name="twd_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
+          args="-urdf -param robot_description -model 2wd -x $(arg x) -y $(arg y) -z $(arg z)" />
+
+</launch>

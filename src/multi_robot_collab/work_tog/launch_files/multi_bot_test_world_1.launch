@@ -1,0 +1,62 @@
+<launch>
+  <arg name="first_bot"  default="bot_0"/>
+  <arg name="second_bot" default="bot_1"/>
+  <arg name="third_bot"  default="bot_2"/>
+
+  <arg name="first_bot_x_pos" default=" -9.0"/>
+  <arg name="first_bot_y_pos" default=" -1.5"/>
+  <arg name="first_bot_z_pos" default=" 0.0"/>
+  <arg name="first_bot_yaw"   default=" -0.785398"/>
+
+  <arg name="second_bot_x_pos" default=" -9.0"/>
+  <arg name="second_bot_y_pos" default=" 1.5"/>
+  <arg name="second_bot_z_pos" default=" 0.0"/>
+  <arg name="second_bot_yaw"   default=" 0.785398"/>
+
+  <arg name="third_bot_x_pos" default=" -9."/>
+  <arg name="third_bot_y_pos" default=" 0.0"/>
+  <arg name="third_bot_z_pos" default=" 0.0"/>
+  <arg name="third_bot_yaw"   default=" 0.0"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find two_wd_worlds)/worlds/world04.world"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>  
+
+  <group ns = "$(arg first_bot)">
+    <param name="robot_description" command="$(find xacro)/xacro --inorder $(find work_tog)/models/diff.xacro" />
+
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
+      <param name="publish_frequency" type="double" value="50.0" />
+      <param name="tf_prefix" value="$(arg first_bot)" />
+    </node>
+    
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model $(arg first_bot) -x $(arg first_bot_x_pos) -y $(arg first_bot_y_pos) -z $(arg first_bot_z_pos) -Y $(arg first_bot_yaw) -param robot_description" />
+  </group>
+
+  <group ns = "$(arg second_bot)">
+    <param name="robot_description" command="$(find xacro)/xacro --inorder $(find work_tog)/models/diff.xacro" />
+
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
+      <param name="publish_frequency" type="double" value="50.0" />
+      <param name="tf_prefix" value="$(arg second_bot)" />
+    </node>
+
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model $(arg second_bot) -x $(arg second_bot_x_pos) -y $(arg second_bot_y_pos) -z $(arg second_bot_z_pos) -Y $(arg second_bot_yaw) -param robot_description" />
+  </group>
+
+  <group ns = "$(arg third_bot)">
+    <param name="robot_description" command="$(find xacro)/xacro --inorder $(find work_tog)/models/diff.xacro" />
+
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
+      <param name="publish_frequency" type="double" value="50.0" />
+      <param name="tf_prefix" value="$(arg third_bot)" />
+    </node>
+
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model $(arg third_bot) -x $(arg third_bot_x_pos) -y $(arg third_bot_y_pos) -z $(arg third_bot_z_pos) -Y $(arg third_bot_yaw) -param robot_description" />
+  </group>
+</launch>

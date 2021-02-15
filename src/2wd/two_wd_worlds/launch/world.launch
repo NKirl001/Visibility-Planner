@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<launch>
+  <arg name="robot" default="machines"/>
+  <arg name="debug" default="false"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="pause" default="false"/>
+  <arg name="world" default="world04" />
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find my_worlds)/worlds/$(arg world).world"/>
+    <arg name="debug" value="$(arg debug)" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="paused" value="$(arg pause)"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="headless" value="$(arg headless)"/>
+  </include>
+
+  <param name="robot_description" command="$(find xacro)/xacro.py '$(find two_wd_description)/urdf/2wd.xacro'"/>
+    <arg name="x" default="-9"/>
+    <arg name="y" default="0"/> "2"
+    <arg name="z" default="0"/> "0.5"
+
+  <remap from="/cmd_vel" to="/2wd/cmd_vel"/>
+  <remap from="/odom" to="/2wd/odom"/>
+
+
+  <node name="two_wd_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
+   args="-urdf -param robot_description -model 2wd -x $(arg x) -y $(arg y) -z $(arg z)" />
+
+</launch>
