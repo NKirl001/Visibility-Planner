@@ -16,11 +16,17 @@ To Launch a single robot differntial drive simulation:
 -requires 3 terminals
 1) open a terminal
 2) navigate to this directory 
+
 In terminal 1
+
 3) Enter: $ roslaunch two_wd_worlds world.launch
+
 In terminal 2
+
 4) Launch Gmapping: $roslaunch two_wd_scripts gmapping.launch 
+
 In terminal 3
+
 5) Enter: $ rosrun two_wd_scripts robot_control_test.py 
 
 -------------------------------------------------------------
