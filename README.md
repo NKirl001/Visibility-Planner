@@ -32,18 +32,23 @@ In terminal 1 run
 3) $ roslaunch work_tog multi_bot.launch 
 
 In terminal 2 run
+
 4) $ ROS_NAMESPACE=bot_0 roslaunch work_tog gmapping_multi.launch base_frame:=bot_0/link_chassis odom_frame:=bot_0/odom scan_topic:=/bot_0/laser/scan set_map_frame:=bot_0/map
 
 In terminal 3 run 
+
 5) $ ROS_NAMESPACE=bot_1 roslaunch work_tog gmapping_multi.launch base_frame:=bot_1/link_chassis odom_frame:=bot_1/odom scan_topic:=/bot_1/laser/scan set_map_frame:=bot_1/map
 
 In terminal 4 run 
+
 6) $ ROS_NAMESPACE=bot_2 roslaunch work_tog gmapping_multi.launch base_frame:=bot_2/link_chassis odom_frame:=bot_2/odom scan_topic:=/bot_2/laser/scan set_map_frame:=bot_2/map
 
 In terminal 5 run 
+
 7) $ roslaunch work_tog multi_map_merge.launch 
 
 In terminal 6 run 
+
 8) $ rosrun rviz rivz
 
 the remaining terminals are used to send commands to each robot. 
