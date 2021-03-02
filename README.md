@@ -35,7 +35,7 @@ To Launch a Multi-robot simulation:
 1) open a terminal
 2) navigate to this directory 
 In terminal 1 run 
-3) $ roslaunch work_tog multi_bot.launch 
+3) $ roslaunch work_tog multi_bot_test_world_1.launch 
 
 In terminal 2 run
 
