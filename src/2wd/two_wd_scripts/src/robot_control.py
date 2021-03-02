@@ -21,11 +21,11 @@ class RobotControl():
 
     def __init__(self):
         rospy.init_node('robot_control_node', anonymous=True)
-        self.vel_publisher = rospy.Publisher('/2wd/cmd_vel', Twist, queue_size=1)
+        self.vel_publisher = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
         self.laser_subscriber = rospy.Subscriber(
-            '/2wd/laser/scan', LaserScan, self.laser_callback)
+            '/laser/scan', LaserScan, self.laser_callback)
         self.odom_subcriber =rospy.Subscriber(
-            '/2wd/odom', Odometry, self.odom_callback)     
+            '/odom', Odometry, self.odom_callback)     
         self.odom_msg = Odometry()
         self.cmd = Twist()
         self.laser_msg = LaserScan()
