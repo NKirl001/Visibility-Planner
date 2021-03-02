@@ -2,7 +2,7 @@
 <robot name="2wd" xmlns:xacro="http://www.ros.org/wiki/xacro"> 
 
   <xacro:include filename="$(find two_wd_description)/urdf/materials.xacro" />
-  <xacro:include filename="$(find two_wd_description)/urdf/2wd.gazebo" />
+  <xacro:include filename="$(find work_tog)/models/2wd.gazebo" />
   <xacro:include filename="$(find two_wd_description)/urdf/macros.xacro" />
 
   <link name="link_chassis">
